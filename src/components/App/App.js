@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Form from "../Form/Form";
 import ContactList from "../ContactList/ContactList";
-import { Filter } from "../Filter/Filter";
+import Filter from "../Filter/Filter";
 
 const App = () => {
   const [filter, setFilter] = useState("");
@@ -24,8 +24,10 @@ const App = () => {
     setContacts((prevState) => [newContact, ...prevState]);
   };
 
-  const filterChange = (event) => setFilter(event.currentTarget.value);
-
+  const filterChange = (event) => {
+    setFilter(event.currentTarget.value);
+  };
+   
   const contactsFilter = () => {
     return contacts.filter((contact) =>
       contact.name.toUpperCase().includes(filter.toUpperCase())

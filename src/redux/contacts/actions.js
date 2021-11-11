@@ -11,9 +11,9 @@ export const deleteContact = (id) => {
     }
 };
 
-export const filterContact = (name) => {
+export const filterContact = (value) => {
     return {
         type: "contactList/filter",
-        payload: {name},
+        payload: value,
     }
 };
