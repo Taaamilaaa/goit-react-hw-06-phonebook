@@ -2,10 +2,10 @@ import {  useState } from "react";
 import { v4 as uuid } from "uuid";
 import styles from "./form.module.css";
 import { connect } from "react-redux";
-import { addContact, deleteContact } from "../../redux/contacts/actions";
+import { addContact } from "../../redux/contacts/actions";
 
 
-const Form = ({ onSubmit }) => {
+const Form = ({ onSubmit, onAdd }) => {
   const nameInputId = uuid();
   const numberInputId = uuid();
 
@@ -25,15 +25,12 @@ const Form = ({ onSubmit }) => {
     const contact = {
       id: uuid(),
       name: name,
-      number: number}
-   
-    onSubmit(contact);
-
+      number: number}   
+    // onSubmit(contact);
+    onAdd(contact)    
     setName("");
-    setNumber("");
-   
+    setNumber("");   
   };
-
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <label className={styles.label} htmlFor={nameInputId}>
@@ -72,17 +69,16 @@ const Form = ({ onSubmit }) => {
 };
 
 const mapStateToProps = state => {
-  console.log(state.contacts);
-  return {
-    contList: state.contacts
+   return {
+    contactList: state.contacts
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onAdd: ({contact}) => dispatch(addContact({contact})),
+    onAdd: contact => dispatch(addContact(contact)),
   };
 };
-console.log(connect(mapStateToProps, mapDispatchToProps)(Form));
+
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
 

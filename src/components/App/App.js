@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Form from "../Form/Form";
 import ContactList from "../ContactList/ContactList";
-import { v4 as uuid } from "uuid";
+
 import { Filter } from "../Filter/Filter";
-// import { connect } from "react-redux";
-// import *as actions from "../../redux/contacts/actions"
+import { connect } from "react-redux";
+// import { filterReducer } from "../";
+
 
 const App = () => {
   const [filter, setFilter] = useState("");
@@ -36,11 +37,6 @@ const App = () => {
     );
   };
 
-  const onBtnDelClick = (id) => {
-    console.log(id);
-    setContacts((state) => state.filter((contact) => contact.id !== id));
-  };
-
   useEffect(() => {
     const parsedContacts = JSON.parse(localStorage.getItem("contacts"));
     if (parsedContacts) {
@@ -62,24 +58,25 @@ const App = () => {
       <h2 className="title">Contacts</h2>
       <Filter value={filter} onChange={filterChange} />
       {contacts.length > 0 ? (
-        <ContactList contacts={contactsFilter()} clickOnBtn={onBtnDelClick} />
+        <ContactList
+          // contacts={contactsFilter()}
+        />
       ) : (
         <p className="notification">Please add your contacts.</p>
       )}
     </div>
   );
 };
-export default App;
+const mapStateToProps = state => {
+   return {
+    contactList: state.contacts
+  };
+};
 
-// const mapStateToProps = (state) => {
+// const mapDispatchToProps = dispatch => {
 //   return {
-//     contacts: state.contacts,
-//   }
-// }
-// const mapDispatchToProps = (dispatch) => {
-//   return {
+//     onFilter: contact => dispatch(filterReducer(contact)),
+//   };
+// };
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
-// clickOnBtn: () => dispatch(actions.addContact)
-//   }
-// }
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
