@@ -1,16 +1,15 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import styles from "./form.module.css";
 import { connect } from "react-redux";
 import { addContact } from "../../redux/contacts/actions";
-
 
 const Form = ({ onSubmit, onAdd }) => {
   const nameInputId = uuid();
   const numberInputId = uuid();
 
   const [name, setName] = useState("");
-  const [number, setNumber] = useState(""); 
+  const [number, setNumber] = useState("");
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -18,18 +17,19 @@ const Form = ({ onSubmit, onAdd }) => {
 
   const handleChangeNumber = (e) => {
     setNumber(e.target.value);
-      };
- 
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const contact = {
       id: uuid(),
       name: name,
-      number: number}   
+      number: number,
+    };
     // onSubmit(contact);
-    onAdd(contact)    
+    onAdd(contact);
     setName("");
-    setNumber("");   
+    setNumber("");
   };
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -67,18 +67,10 @@ const Form = ({ onSubmit, onAdd }) => {
     </form>
   );
 };
-
-const mapStateToProps = state => {
-   return {
-    contactList: state.contacts
-  };
-};
-
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onAdd: contact => dispatch(addContact(contact)),
+    onAdd: (contact) => dispatch(addContact(contact)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
-
+export default connect(null, mapDispatchToProps)(Form);

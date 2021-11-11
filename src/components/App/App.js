@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Form from "../Form/Form";
 import ContactList from "../ContactList/ContactList";
-
 import { Filter } from "../Filter/Filter";
-import { connect } from "react-redux";
-// import { filterReducer } from "../";
-
 
 const App = () => {
   const [filter, setFilter] = useState("");
@@ -18,7 +14,6 @@ const App = () => {
   ]);
 
   const formSubmitHandle = (newContact) => {
-   
     const renderedNames = contacts.find(
       (contact) => contact.name.toUpperCase() === newContact.name.toUpperCase()
     );
@@ -58,25 +53,12 @@ const App = () => {
       <h2 className="title">Contacts</h2>
       <Filter value={filter} onChange={filterChange} />
       {contacts.length > 0 ? (
-        <ContactList
-          // contacts={contactsFilter()}
-        />
+        <ContactList contacts={contactsFilter()} />
       ) : (
         <p className="notification">Please add your contacts.</p>
       )}
     </div>
   );
 };
-const mapStateToProps = state => {
-   return {
-    contactList: state.contacts
-  };
-};
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     onFilter: contact => dispatch(filterReducer(contact)),
-//   };
-// };
-export default connect(mapStateToProps, mapDispatchToProps)(App);
-
+export default App;

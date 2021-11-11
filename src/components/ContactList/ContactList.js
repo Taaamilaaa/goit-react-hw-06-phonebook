@@ -1,34 +1,17 @@
-import { ContactItem } from "../ContactItem/ContactItem";
+import ContactItem from "../ContactItem/ContactItem";
 import styles from "./contactList.module.css";
-import PropTypes from "prop-types"; // ES6
-import { connect } from "react-redux";
-import {deleteContact} from "../../redux/contacts/actions"
-
- function ContactList({ contactList, onDel }) {
+import PropTypes from "prop-types";
+const ContactList = () => {
   return (
-    <>
-      <ul className={styles.list}>
-        <ContactItem contacts={contactList} clickOnBtn={onDel} key={contactList.id} />
-      </ul>
-    </>
+    <ul className={styles.list}>
+      <ContactItem />
+    </ul>
   );
-}
+};
+
 ContactList.prototype = {
-contacts: PropTypes.obj,
-clickOnBtn: PropTypes.func,
-}
-
-const mapStateToProps = state => {
-   return {
-    contactList: state.contacts
-  };
+  contacts: PropTypes.obj,
+  clickOnBtn: PropTypes.func,
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onDel: contact => dispatch(deleteContact(contact)),
-  };
-};
-
-
-export default connect(mapStateToProps , mapDispatchToProps)(ContactList)
+export default ContactList;
