@@ -19,14 +19,15 @@ const contactsListReducer = (state = initialState, action) => {
   }
 };
 
- export const filterReducer = (state = "", action) => {
-    switch (action.type) {
-        case "contactList/filter":
-            return [...action.payload.value];
-        default:
-            return state;
-    };
-};
+export const filterReducer = (state = "", action) => {
+  switch (action.type) {
+    case "contactList/filter":
+      return action.payload;
+    default:      
+  return state;
+  }
+    
+}
 export const rootReducer = combineReducers({
   contacts: contactsListReducer,
   filter: filterReducer,

@@ -2,12 +2,12 @@ import styles from './filter.module.css';
 import PropTypes from "prop-types";
 
 
- const Filter = ({ value, onChange }) => {
+ const Filter = ({  onChange }) => {
   
   return (
     <>
          <label className = {styles.label}>Find contacts by name</label>
-         <input className={styles.input} value={value} onChange={ onChange} />
+         <input className={styles.input}  onChange={ onChange} />
        </>
   )
 };
