@@ -1,3 +1,10 @@
+// import { createAction } from '@reduxjs/toolkit';
+
+// export const addContact = createAction("contact/add");
+// export const deleteContact = createAction("contact/delete");
+// export const filterContact = createAction("contactList/filter");
+// export const filteredContacts = createAction("contactList/filteredCont");
+
 export const addContact = (contact) => {
     return {
         type: "contact/add",

@@ -1,6 +1,7 @@
-import { addContact, deleteContact } from "./actions";
-import { combineReducers } from "redux";
+// import { createReducer } from '@reduxjs/toolkit';
 
+// import { addContact, deleteContact, filterContact, filteredContacts } from "./actions";
+import { combineReducers } from "redux";  //Redux
 const initialState = [
   { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
   { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
@@ -8,7 +9,21 @@ const initialState = [
   { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
 ];
 
-const contactsListReducer = (state = initialState, action) => {
+// export const contactsListReducer = createReducer(initialState, {
+//   [addContact]: (state, action) => [...state, action.payload],
+//   [deleteContact]: (state, action) => state.filter((contact) => contact.id !== action.payload.id),
+// })
+
+
+// export const filterReducer = createReducer('', {
+//   [filterContact]: (_, { payload }) => payload,
+// });
+// export const visibleCont = createReducer([], {
+//   [filteredContacts]: (_, action) => [...action.payload],
+// });
+
+//////////////////////////////Redux
+export const contactsListReducer = (state = initialState, action) => {
   switch (action.type) {
     case "contact/add":
       return [...state, action.payload];

@@ -33,10 +33,10 @@ const Form = ({ contactList, onAdd }) => {
     );
     if (renderedNames) {
       alert(`${newContact.name} is already on contacts`);
+      setName("");
+      setNumber("");
       return;
     }
-
-  
     onAdd(newContact);
     setName("");
     setNumber("");
