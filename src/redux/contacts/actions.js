@@ -17,3 +17,9 @@ export const filterContact = (value) => {
         payload: value,
     }
 };
+export const filteredContacts = (arrCont) => {
+    return {
+        type: "contactList/filteredCont",
+        payload: arrCont,
+    }
+};

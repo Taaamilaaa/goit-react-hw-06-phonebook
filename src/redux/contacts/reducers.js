@@ -22,13 +22,22 @@ const contactsListReducer = (state = initialState, action) => {
 export const filterReducer = (state = "", action) => {
   switch (action.type) {
     case "contactList/filter":
-      return action.payload;
+      return action.payload;   
     default:      
   return state;
   }
     
 }
+export const visibleCont = (state = [], action) => {
+    switch (action.type) {   
+    case "contactList/filteredCont":
+      return [...action.payload];
+    default:      
+  return state;
+  }
+}
 export const rootReducer = combineReducers({
   contacts: contactsListReducer,
   filter: filterReducer,
+  filteredCont: visibleCont,
 });

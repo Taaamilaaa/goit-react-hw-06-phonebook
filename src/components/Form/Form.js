@@ -4,7 +4,7 @@ import styles from "./form.module.css";
 import { connect } from "react-redux";
 import { addContact } from "../../redux/contacts/actions";
 
-const Form = ({ onSubmit, onAdd }) => {
+const Form = ({ contactList, onAdd }) => {
   const nameInputId = uuid();
   const numberInputId = uuid();
 
@@ -21,16 +21,27 @@ const Form = ({ onSubmit, onAdd }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const contact = {
+
+    const newContact = {
       id: uuid(),
       name: name,
       number: number,
     };
-    // onSubmit(contact);
-    onAdd(contact);
+
+    const renderedNames = contactList.find(
+      (contact) => contact.name.toLowerCase() === newContact.name.toLowerCase()
+    );
+    if (renderedNames) {
+      alert(`${newContact.name} is already on contacts`);
+      return;
+    }
+
+  
+    onAdd(newContact);
     setName("");
     setNumber("");
   };
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <label className={styles.label} htmlFor={nameInputId}>
@@ -67,10 +78,16 @@ const Form = ({ onSubmit, onAdd }) => {
     </form>
   );
 };
+
+const mapStateToProps = (state) => {
+  return {
+    contactList: state.contacts,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onAdd: (contact) => dispatch(addContact(contact)),
   };
 };
-
-export default connect(null, mapDispatchToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(Form);
