@@ -14,11 +14,7 @@
 //   REGISTER,
 // } from "redux-persist";
 
-// export const rootReducer = combineReducers({
-//   contacts: contactsListReducer,
-//   filter: filterReducer,
-//   filteredCont: visibleCont,
-// });
+
 
 // const persistConfig = {
 //   key: "contacts",
@@ -26,7 +22,11 @@
 //   storage,
 //   blacklist: ["filter", "filteredCont"],
 // };
-
+// export const rootReducer = combineReducers({
+//   contacts: contactsListReducer,
+//   filter: filterReducer,
+//   filteredCont: visibleCont,
+// });
 // const persistedContactsReducer = persistReducer(persistConfig, rootReducer);
 
 // export const store = configureStore({
@@ -42,10 +42,12 @@
 // export const persistor = persistStore(store);
 
 //////////////////Redux
+
 import { createStore } from "redux";
 import { rootReducer } from "./contacts/reducers";
 import { composeWithDevTools } from 'redux-devtools-extension';
+
 const store = createStore(rootReducer, composeWithDevTools());
 export default store;
-///////////////////
+/////////////////
 
