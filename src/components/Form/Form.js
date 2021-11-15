@@ -3,9 +3,10 @@ import { v4 as uuid } from "uuid";
 import styles from "./form.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/actions";
+import { getContactsList } from "../../redux/contacts/contacts-selectors";
 
 const Form = () => {
-  const contactList = useSelector(state => state.contacts);
+  const contactList = useSelector(getContactsList);
   const dispatch = useDispatch();
 
   const nameInputId = uuid();
@@ -32,7 +33,7 @@ const Form = () => {
     };
 
     const renderedNames = contactList.find(
-      (contact) => contact.name.toLowerCase() === newContact.name.toLowerCase()
+      ({name}) => name.toLowerCase() === newContact.name.toLowerCase()
     );
     if (renderedNames) {
       alert(`${newContact.name} is already on contacts`);

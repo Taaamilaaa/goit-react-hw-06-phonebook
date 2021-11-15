@@ -3,12 +3,11 @@ import styles from "./contactItem.module.css";
 import PropTypes from "prop-types";
 import { deleteContact } from "../../redux/contacts/actions";
 import { useSelector, useDispatch } from "react-redux";
+import { getContactsList } from "../../redux/contacts/contacts-selectors";
+import { getFilter } from "../../redux/contacts/contacts-selectors";
 
 const ContactItem = () => {
-  
-  const contacts = useSelector((state) => state.contacts);
-  const filter = useSelector((state) => state.filter);
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
   const getVisibleContact = (arrOfContacts, filter) => {
     return arrOfContacts.filter((contact) =>
@@ -16,10 +15,12 @@ const ContactItem = () => {
     );
   };
 
-  const visibleContacts = getVisibleContact(contacts, filter);
+  const visibleContacts = getVisibleContact(
+    useSelector(getContactsList),
+    useSelector(getFilter)
+  );
 
-  return visibleContacts.map((contact) => {
-    const { id, name, number } = contact;
+  return visibleContacts.map(({ id, name, number }) => {  
     return (
       <li className={styles.contactItem} key={id}>
         <span id="name" className={styles.name}>
