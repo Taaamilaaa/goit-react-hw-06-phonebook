@@ -1,8 +1,7 @@
 import ContactItem from "../ContactItem/ContactItem";
 import styles from "./contactList.module.css";
 import PropTypes from "prop-types";
-
-const ContactList = () => { 
+const ContactList = () => {
   return (
     <ul className={styles.list}>
       <ContactItem />

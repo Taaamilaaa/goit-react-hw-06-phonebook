@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import styles from "./form.module.css";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/actions";
 
-const Form = ({ contactList, onAdd }) => {
+const Form = () => {
+  const contactList = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
   const nameInputId = uuid();
   const numberInputId = uuid();
 
@@ -36,8 +39,8 @@ const Form = ({ contactList, onAdd }) => {
       setName("");
       setNumber("");
       return;
-    }
-    onAdd(newContact);
+    };
+    dispatch(addContact(newContact));    
     setName("");
     setNumber("");
   };
@@ -79,15 +82,4 @@ const Form = ({ contactList, onAdd }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    contactList: state.contacts,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onAdd: (contact) => dispatch(addContact(contact)),
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default Form;
